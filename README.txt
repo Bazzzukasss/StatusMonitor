@@ -1,0 +1,1 @@
+Status monitor model based widget.
