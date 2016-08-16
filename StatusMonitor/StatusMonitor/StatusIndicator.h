@@ -23,7 +23,6 @@ public:
     StatusIndicator& operator=(const StatusIndicator& indicator);
 
     void addProperty(const QString& propertyName, const QVariant& propertyValue);
-
     void setProperty(const QString& propertyName, const QVariant& propertyValue);
 
     QVariant getPropertyValue(const QString& propertyName) const;
