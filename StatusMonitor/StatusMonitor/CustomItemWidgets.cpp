@@ -1,4 +1,4 @@
-#include "StatusIndicatorWidgets.h"
+#include "CustomItemWidgets.h"
 
 //SILCDNumber
 QLCDNumberSI::QLCDNumberSI(QWidget *parent)

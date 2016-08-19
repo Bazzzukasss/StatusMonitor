@@ -1,24 +1,24 @@
-#ifndef STATUSINDICATORWIDGET_H
-#define STATUSINDICATORWIDGET_H
+#ifndef CUSTOMITEMWIDGET_H
+#define CUSTOMITEMWIDGET_H
 
 #include <QWidget>
 #include <QLineEdit>
 #include <QVBoxLayout>
 
-#include "StatusIndicator.h"
-#include "StatusIndicatorWidgets.h"
-#include "StatusIndicatorTypes.h"
+#include "CustomItem.h"
+#include "CustomItemWidgets.h"
+#include "CustomItemTypes.h"
 
-class StatusIndicatorWidget : public QWidget
+class CustomItemWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit StatusIndicatorWidget(QWidget *parent = 0);
-    explicit StatusIndicatorWidget(const StatusIndicator& indicator,QWidget *parent = 0);
+    explicit CustomItemWidget(QWidget *parent = 0);
+    explicit CustomItemWidget(CustomItem* item,QWidget *parent = 0);
 
-    void setIndicator(const StatusIndicator& indicator);
+    void setIndicator(CustomItem* item);
 
-    const StatusIndicator& getIndicator() const;
+    CustomItem* getIndicator() const;
 
     void setCurrentPropertyIndex(int propertyIndex);
 
@@ -30,7 +30,7 @@ signals:
 public slots:
 
 private:
-    StatusIndicator mIndicator;
+    CustomItem* mIndicator;
     int mCurrentPropertyIndex;
 
     void build();
@@ -52,4 +52,4 @@ private:
     QVBoxLayout* mLayout;
 };
 
-#endif // STATUSINDICATORWIDGET_H
+#endif // CUSTOMITEMWIDGET_H

@@ -1,5 +1,5 @@
-#ifndef QGRAPHWIDGET_H
-#define QGRAPHWIDGET_H
+#ifndef CUSTOMITEMWIDGETS_H
+#define CUSTOMITEMWIDGETS_H
 
 #include <QObject>
 #include <QWidget>
@@ -12,7 +12,7 @@
 #include <QProgressBar>
 
 #include "qcustomplot.h"
-#include "StatusIndicatorTypes.h"
+#include "CustomItemTypes.h"
 
 class QLCDNumberSI : public QLCDNumber
 {
@@ -86,4 +86,4 @@ public:
 private:
     QCPGraph *mGraph;
 };
-#endif // QGRAPHWIDGET_H
+#endif // CUSTOMITEMWIDGETS_H

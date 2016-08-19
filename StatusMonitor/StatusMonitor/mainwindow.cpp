@@ -1,8 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
-#include "StatusIndicatorTableModel.h"
-#include "StatusIndicatorDelegate.h"
+#include "CustomItemTableModel.h"
+#include "CustomItemDelegate.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,12 +10,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->statusMonitor->setHeaders({"NAME","VALUE","DESC","TEST"});
+    ui->buildlistMonitor->setHeaders({"NAME","VALUE","DESC"});//,"TEST"});
     mTimer = new QTimer(this);
     connect(mTimer, SIGNAL(timeout()),   this,   SLOT(slotTimeout()));
-    connect(this,   SIGNAL(slotStatusMonitorUpdate(const QList<StatusIndicator>&)),    ui->statusMonitor,  SLOT(slotUpdateIndicators(const QList<StatusIndicator>&)));
+    connect(this,   SIGNAL(signalStatusMonitorUpdate(CustomItem*)),     ui->statusMonitor,      SLOT(slotUpdateItems(CustomItem*)));
+    connect(this,   SIGNAL(signalBuildListMonitorUpdate(CustomItem*)),  ui->buildlistMonitor,   SLOT(slotUpdateItems(CustomItem*)));
 
+    slotTimeout();
     mTimer->start(200);
-    //slotTimeout();
 }
 
 MainWindow::~MainWindow()
@@ -26,7 +28,7 @@ MainWindow::~MainWindow()
 void MainWindow::slotTimeout()
 {
     static bool stage = true;
-    QList<StatusIndicator> indList;
+    QList<CustomItem> indList;
 
     int vecSize = std::rand()/1000;
     //qDebug()<<vecSize;
@@ -50,21 +52,44 @@ void MainWindow::slotTimeout()
     SIBars si_bars(QVector<double>().fromStdVector(stdVector));
     SIGraph si_graph(QVector<double>().fromStdVector(stdVector));
 
-    indList     << StatusIndicator("SIString:",QVariant().fromValue(si_string),"desc1")
-                << StatusIndicator("SIDouble:",QVariant().fromValue(si_double),"desc2")
-                << StatusIndicator("SIProgress:",QVariant().fromValue(si_progress),"desc3")
-                << StatusIndicator("SIInteger:",QVariant().fromValue(si_integer),"desc4")
-                << StatusIndicator("SILCD:",QVariant().fromValue(si_lcd),"desc5")
-                << StatusIndicator("SIBoolean:",QVariant().fromValue(si_boolean),"desc6")
-                << StatusIndicator("SIBars:",QVariant().fromValue( si_bars ),"desc7")
-                << StatusIndicator("Integer:",integerValue,"desc8")
-                << StatusIndicator("Double:",doubleValue,"desc9")
-                << StatusIndicator("Boolean:",booleanValue,"desc10")
-                << StatusIndicator("String:",stringValue,"desc11");
+    CustomItem* rootItem = new CustomItem();
+#if(1)
+    CustomItem* item = new CustomItem("SIString:",QVariant().fromValue(si_string),"desc1");
 
-indList[2].addProperty("graph",QVariant().fromValue( si_graph ));
+    item->addItem( new CustomItem("SIDouble:",QVariant().fromValue(si_double),"desc2"));
+    item->addItem( new CustomItem("SIProgress:",QVariant().fromValue(si_progress),"desc3"));
 
-    emit slotStatusMonitorUpdate(indList);
+    rootItem->addItem( new CustomItem("Boolean:",booleanValue,"desc10"));
+    rootItem->addItem( new CustomItem("String:",stringValue,"desc11"));
+    rootItem->addItem( item );
+    rootItem->addItem( new CustomItem("SIString:",QVariant().fromValue(si_string),"desc1"));
+    rootItem->addItem( new CustomItem("SIDouble:",QVariant().fromValue(si_double),"desc2"));
+    rootItem->addItem( new CustomItem("SIProgress:",QVariant().fromValue(si_progress),"desc3"));
+    rootItem->addItem( new CustomItem("SIInteger:",QVariant().fromValue(si_integer),"desc4"));
+    rootItem->addItem( new CustomItem("SILCD:",QVariant().fromValue(si_lcd),"desc5"));
+    rootItem->addItem( new CustomItem("SIBoolean:",QVariant().fromValue(si_boolean),"desc6"));
+    rootItem->addItem( new CustomItem("SIBars:",QVariant().fromValue( si_bars ),"desc7"));
+    rootItem->addItem( new CustomItem("Integer:",integerValue,"desc8"));
+    rootItem->addItem( new CustomItem("Double:",doubleValue,"desc9"));
+    rootItem->addItem( new CustomItem("Boolean:",booleanValue,"desc10"));
+    rootItem->addItem( new CustomItem("String:",stringValue,"desc11"));
+
+#else
+
+    rootItem->addItem( new CustomItem("SIString:",QVariant().fromValue(si_string),"desc1"));
+    rootItem->addItem( new CustomItem("SIDouble:",QVariant().fromValue(si_double),"desc2"));
+    rootItem->addItem( new CustomItem("SIProgress:",QVariant().fromValue(si_progress),"desc3"));
+    rootItem->addItem( new CustomItem("SIInteger:",QVariant().fromValue(si_integer),"desc4"));
+    rootItem->addItem( new CustomItem("SILCD:",QVariant().fromValue(si_lcd),"desc5"));
+    rootItem->addItem( new CustomItem("SIBoolean:",QVariant().fromValue(si_boolean),"desc6"));
+    rootItem->addItem( new CustomItem("SIBars:",QVariant().fromValue( si_bars ),"desc7"));
+    rootItem->addItem( new CustomItem("Integer:",integerValue,"desc8"));
+    rootItem->addItem( new CustomItem("Double:",doubleValue,"desc9"));
+    rootItem->addItem( new CustomItem("Boolean:",booleanValue,"desc10"));
+    rootItem->addItem( new CustomItem("String:",stringValue,"desc11"));
+#endif
+    emit signalStatusMonitorUpdate(rootItem);
+    emit signalBuildListMonitorUpdate(rootItem);
 
     stage = !stage;
 }

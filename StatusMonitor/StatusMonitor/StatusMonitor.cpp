@@ -5,59 +5,14 @@ StatusMonitor::StatusMonitor(QWidget *parent)
 {
     build();
 }
-
-void StatusMonitor::setHeaders(const QVector<QString> &headers)
-{
-    mModel->setHeaders(headers);
-    resizeViewToContents();
-}
-
-void StatusMonitor::setIndicators(const QList<StatusIndicator> &indicators)
-{
-    mModel->setIndicators(indicators);
-    resizeViewToContents();
-}
-void StatusMonitor::updateIndicators(const QList<StatusIndicator> &indicators)
-{
-    mModel->setIndicators(indicators);
-}
-
-
-
-void StatusMonitor::slotSetIndicators(const QList<StatusIndicator> &indicators)
-{
-    setIndicators(indicators);
-}
-
-void StatusMonitor::slotSetHeaders(const QVector<QString> &headers)
-{
-    setHeaders(headers);
-}
-
-void StatusMonitor::slotResizeViewToContents()
-{
-    resizeViewToContents();
-}
-
-void StatusMonitor::slotUpdateIndicators(const QList<StatusIndicator> &indicators)
-{
-    updateIndicators(indicators);
-    mCaption->setChecked( !mCaption->isChecked() );
-}
-
-void StatusMonitor::resizeViewToContents()
-{
-    mTableView->resizeColumnsToContents();
-    mTableView->resizeRowsToContents();
-}
-
 void StatusMonitor::build()
 {
-    mModel = new StatusIndicatorTableModel(this);
-    mDelegate = new StatusIndicatorDelegate(this);
+    mModel = new CustomItemTableModel(this);
+    mDelegate = new CustomItemDelegate(this);
     mTableView = new QTableView(this);
     mCaption = new QRadioButton("Status Monitor",this);
     mLayout = new QVBoxLayout(this);
+
     mLayout->setMargin(0);
     mLayout->setSpacing(0);
     mLayout->addWidget(mCaption);
@@ -70,5 +25,48 @@ void StatusMonitor::build()
 
     mCaption->setChecked(false);
     resizeViewToContents();
-
 }
+void StatusMonitor::resizeViewToContents()
+{
+    mTableView->resizeColumnsToContents();
+    mTableView->resizeRowsToContents();
+}
+
+void StatusMonitor::setHeaders(const QVector<QString> &headers)
+{
+    mModel->setHeaders(headers);
+    resizeViewToContents();
+}
+
+void StatusMonitor::setItems(CustomItem* rootItem)
+{
+    mModel->setItems(rootItem);
+    resizeViewToContents();
+}
+void StatusMonitor::updateItems(CustomItem* rootItem)
+{
+    mModel->setItems(rootItem);
+}
+//SLOTS
+void StatusMonitor::slotSetHeaders(const QVector<QString> &headers)
+{
+    setHeaders(headers);
+}
+
+void StatusMonitor::slotResizeViewToContents()
+{
+    resizeViewToContents();
+}
+
+void StatusMonitor::slotUpdateItems(CustomItem* rootItem)
+{
+    updateItems(rootItem);
+    mCaption->setChecked( !mCaption->isChecked() );
+}
+void StatusMonitor::slotSetItems(CustomItem* rootItem)
+{
+    setItems(rootItem);
+}
+
+
+

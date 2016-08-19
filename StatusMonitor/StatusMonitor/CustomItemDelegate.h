@@ -1,18 +1,18 @@
-#ifndef STATUSINDICATORDELEGATE_H
-#define STATUSINDICATORDELEGATE_H
+#ifndef CUSTOMITEMDELEGATE_H
+#define CUSTOMITEMDELEGATE_H
 
 #include <QStyledItemDelegate>
 #include <QPainter>
-#include "StatusIndicatorWidget.h"
-#include "StatusIndicatorTypes.h"
+#include "CustomItemWidget.h"
+#include "CustomItemTypes.h"
 
-class StatusIndicatorDelegate : public QStyledItemDelegate
+class CustomItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    StatusIndicatorDelegate(QObject* parent =0);
+    CustomItemDelegate(QObject* parent =0);
 
-    ~StatusIndicatorDelegate();
+    ~CustomItemDelegate();
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
@@ -25,6 +25,6 @@ public slots:
     void slotCommit();
 
 private:
-    StatusIndicatorWidget* mWidget;
+    CustomItemWidget* mWidget;
 };
-#endif // STATUSINDICATORDELEGATE_H
+#endif // CUSTOMITEMDELEGATE_H

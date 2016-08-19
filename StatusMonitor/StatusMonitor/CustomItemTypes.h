@@ -1,10 +1,10 @@
-#ifndef STATUSINDICATORTYPES_H
-#define STATUSINDICATORTYPES_H
+#ifndef CUSTOMITEMTYPES_H
+#define CUSTOMITEMTYPES_H
 
 template<typename T>
-class StatusIndictorType{
+class CustomItemType{
 public:
-    StatusIndictorType(const T& value)
+    CustomItemType(const T& value)
         :mValue(value)
     {
 
@@ -23,10 +23,10 @@ private:
 };
 
 template<typename T>
-class SIDigits     : public StatusIndictorType<T>{
+class SIDigits     : public CustomItemType<T>{
 public:
     SIDigits(T value = 0,T min= std::numeric_limits<T>::min(),T max = std::numeric_limits<T>::max())
-        :StatusIndictorType<T>(value),mMin(min),mMax(max)
+        :CustomItemType<T>(value),mMin(min),mMax(max)
     {}
     T getMaximum(){return mMax;}
     T getMinimum(){return mMin;}
@@ -52,23 +52,23 @@ public:
     SIProgress(int value = 0,int min= std::numeric_limits<int>::min(),int max = std::numeric_limits<int>::max()):SIDigits<int>(value,min,max){}
 };
 
-class SILcd         : public StatusIndictorType<double>{
+class SILcd         : public CustomItemType<double>{
 public:
     enum mode{HEX,DEC,OCT,BIN};
-    SILcd(double value = 0,int mode = DEC):StatusIndictorType<double>(value),mDisplayMode(mode){}
+    SILcd(double value = 0,int mode = DEC):CustomItemType<double>(value),mDisplayMode(mode){}
     int getDisplayMode(){return mDisplayMode;}
 private:
     int mDisplayMode;
 };
 
-class SIString      : public StatusIndictorType<QString>{
+class SIString      : public CustomItemType<QString>{
 public:
-    SIString(const QString& value = ""):StatusIndictorType<QString>(value){}
+    SIString(const QString& value = ""):CustomItemType<QString>(value){}
 };
 
-class SIPlot        : public StatusIndictorType<QVector<double>>{
+class SIPlot        : public CustomItemType<QVector<double>>{
 public:
-    SIPlot(const QVector<double>& value = QVector<double>()):StatusIndictorType<QVector<double>>(value){}
+    SIPlot(const QVector<double>& value = QVector<double>()):CustomItemType<QVector<double>>(value){}
 };
 
 class SIBars        : public SIPlot{
@@ -81,9 +81,9 @@ public:
     SIGraph(const QVector<double>& value = QVector<double>()):SIPlot(value){}
 };
 
-class SIBoolean      : public StatusIndictorType<bool>{
+class SIBoolean      : public CustomItemType<bool>{
 public:
-    SIBoolean(bool value = false):StatusIndictorType<bool>(value){}
+    SIBoolean(bool value = false):CustomItemType<bool>(value){}
 };
 
 Q_DECLARE_METATYPE(SIBoolean);
@@ -95,4 +95,4 @@ Q_DECLARE_METATYPE(SIString);
 Q_DECLARE_METATYPE(SIBars);
 Q_DECLARE_METATYPE(SIGraph);
 
-#endif //STATUSINDICATORTYPES_H
+#endif //CUSTOMITEMTYPES_H

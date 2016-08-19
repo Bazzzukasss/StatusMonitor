@@ -14,23 +14,29 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    StatusIndicator.cpp \
-    StatusIndicatorWidget.cpp \
-    StatusIndicatorDelegate.cpp \
-    StatusIndicatorTableModel.cpp \
     StatusMonitor.cpp \
     qcustomplot.cpp \
-    StatusIndicatorWidgets.cpp
+    CustomItem.cpp \
+    CustomItemTableModel.cpp \
+    CustomItemDelegate.cpp \
+    CustomItemWidget.cpp \
+    CustomItemWidgets.cpp \
+    CustomItemData.cpp \
+    CustomItemTreeModel.cpp \
+    BuildListMonitor.cpp
 
 HEADERS  += mainwindow.h \
-    StatusIndicator.h \
-    StatusIndicatorWidget.h \
-    StatusIndicatorDelegate.h \
-    StatusIndicatorTableModel.h \
     StatusMonitor.h \
     qcustomplot.h \
-    StatusIndicatorTypes.h \
-    StatusIndicatorWidgets.h
+    CustomItem.h \
+    CustomItemTableModel.h \
+    CustomItemDelegate.h \
+    CustomItemWidget.h \
+    CustomItemWidgets.h \
+    CustomItemTypes.h \
+    CustomItemData.h \
+    CustomItemTreeModel.h \
+    BuildListMonitor.h
 
 FORMS    += mainwindow.ui
 

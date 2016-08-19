@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QTimer>
 
-#include "StatusIndicator.h"
+#include "CustomItem.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,7 +20,8 @@ public:
 public slots:
     void slotTimeout();
 signals:
-    void slotStatusMonitorUpdate(const QList<StatusIndicator>& indicators);
+    void signalStatusMonitorUpdate(CustomItem* items);
+    void signalBuildListMonitorUpdate(CustomItem* items);
 private:
     void initModel();
     Ui::MainWindow *ui;

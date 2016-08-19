@@ -1,15 +1,15 @@
-#ifndef STATUSINDICATORTABLEMODEL_H
-#define STATUSINDICATORTABLEMODEL_H
+#ifndef CUSTOMITEMTABLEMODEL_H
+#define CUSTOMITEMTABLEMODEL_H
 
 #include <QAbstractTableModel>
 #include <QList>
 #include <QVector>
-#include "StatusIndicator.h"
+#include "CustomItem.h"
 
-class StatusIndicatorTableModel : public QAbstractTableModel
+class CustomItemTableModel : public QAbstractTableModel
 {
 public:
-    explicit StatusIndicatorTableModel(QObject *parent = 0);
+    explicit CustomItemTableModel(QObject *parent = 0);
 
     int rowCount(const QModelIndex &parent) const;
     int columnCount(const QModelIndex &parent) const;
@@ -23,14 +23,12 @@ public:
     QVariant data(const QModelIndex &index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
-    void setIndicators(const QList<StatusIndicator>& indicators);
-    void addIndicator(const StatusIndicator& indicator);
+    void setItems(CustomItem* rootItem);
     void setHeaders(const QVector<QString>& headers);
 
-    void generate();
 private:
-    QList<StatusIndicator> mIndicators;
+    QList<CustomItem> mItems;
     QVector<QString> mHeaders;
 };
 
-#endif // STATUSINDICATORTABLEMODEL_H
+#endif // CUSTOMITEMTABLEMODEL_H

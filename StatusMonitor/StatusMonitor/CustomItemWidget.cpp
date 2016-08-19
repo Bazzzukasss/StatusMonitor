@@ -1,34 +1,34 @@
-#include "StatusIndicatorWidget.h"
+#include "CustomItemWidget.h"
 
-StatusIndicatorWidget::StatusIndicatorWidget(QWidget *parent):QWidget(parent)
+CustomItemWidget::CustomItemWidget(QWidget *parent):QWidget(parent)
 {
     init();
 }
 
-StatusIndicatorWidget::StatusIndicatorWidget(const StatusIndicator &indicator, QWidget *parent)
+CustomItemWidget::CustomItemWidget(CustomItem* item, QWidget *parent)
     :QWidget(parent)
 {
     init();
-    setIndicator(indicator);
+    setIndicator(item);
 }
 
-void StatusIndicatorWidget::setIndicator(const StatusIndicator &indicator)
+void CustomItemWidget::setIndicator(CustomItem* item)
 {
-    mIndicator = indicator;
+    mIndicator = item;
     build();
 }
 
-const StatusIndicator &StatusIndicatorWidget::getIndicator() const
+CustomItem* CustomItemWidget::getIndicator() const
 {
     return mIndicator;
 }
 
-void StatusIndicatorWidget::setCurrentPropertyIndex(int propertyIndex)
+void CustomItemWidget::setCurrentPropertyIndex(int propertyIndex)
 {
     mCurrentPropertyIndex = propertyIndex;
 }
 
-QSize StatusIndicatorWidget::getSize()
+QSize CustomItemWidget::getSize()
 {
     if((mCurrentWidget != nullptr) && (!mCurrentWidget))
         return mCurrentWidget->size();
@@ -36,9 +36,12 @@ QSize StatusIndicatorWidget::getSize()
         return mStringWidget->size();
 }
 
-void StatusIndicatorWidget::build()
+void CustomItemWidget::build()
 {
-    QVariant value = mIndicator.getPropertyValue(mCurrentPropertyIndex);
+    QVariant value;
+    if(mIndicator)
+        value = mIndicator->getPropertyValue(mCurrentPropertyIndex);
+
     QString typeName(value.typeName());
 
     mCurrentWidget = nullptr;
@@ -121,7 +124,7 @@ void StatusIndicatorWidget::build()
         mCurrentWidget->setVisible(true);
 }
 
-void StatusIndicatorWidget::init()
+void CustomItemWidget::init()
 {
     setStyleSheet("background-color:white;");
     mStringWidget =     new QLineEditSI(this);

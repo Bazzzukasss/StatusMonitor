@@ -1,5 +1,5 @@
 #ifndef STATUSMONITOR_H
-#define STATUSMONITOR_H
+#define BUILDLISTMONITOR_H
 
 #include <QObject>
 #include <QWidget>
@@ -12,34 +12,35 @@
 #include <QVBoxLayout>
 #include <QHeaderView>
 
-#include "CustomItemTableModel.h"
+#include "CustomItemTreeModel.h"
 #include "CustomItemDelegate.h"
 
-class StatusMonitor : public QFrame
+class BuildListMonitor : public QFrame
 {
     Q_OBJECT
 public:
-    StatusMonitor(QWidget* parent = 0);
-    void updateItems(CustomItem* rootItem);
-    void setItems(CustomItem* rootItem);
+    BuildListMonitor(QWidget* parent = 0);
+
     void setHeaders(const QVector<QString>& headers);
+    void setItems(CustomItem* items);
+    void updateItems(CustomItem* items);
     void resizeViewToContents();
 
 public slots:
-    void slotUpdateItems(CustomItem* rootItem);
-    void slotSetItems(CustomItem* rootItem);
+    void slotSetItems(CustomItem* items);
+    void slotUpdateItems(CustomItem* items);
     void slotSetHeaders(const QVector<QString>& headers);
     void slotResizeViewToContents();
 
 private:
-    CustomItemTableModel* mModel;
+    CustomItemTreeModel* mModel;
     CustomItemDelegate* mDelegate;
 
-    QTableView* mTableView;
+    QTreeView* mTreeView;
     QRadioButton* mCaption;
-    QVBoxLayout* mLayout;    
+    QVBoxLayout* mLayout;
 
     void build();
 };
 
-#endif // STATUSMONITOR_H
+#endif // BUILDLISTMONITOR_H

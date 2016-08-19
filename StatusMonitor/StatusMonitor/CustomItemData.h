@@ -1,38 +1,35 @@
-#ifndef STATUSINDICATOR_H
-#define STATUSINDICATOR_H
+#ifndef CUSTOMITEMDATA_H
+#define CUSTOMITEMDATA_H
 
 #include <QMap>
 #include <QString>
 #include <QVariant>
 #include <QVector>
+#include <QList>
 
-class StatusIndicator
+class CustomItemData
 {
-    struct IndicatorProperty{
-        IndicatorProperty(const QString& name, const QVariant& value)
+    struct CustomItemProperty
+    {
+        CustomItemProperty(const QString& name, const QVariant& value)
             :mName(name),mValue(value)
         {}
-        IndicatorProperty(){}
+        CustomItemProperty(){}
         QString     mName;
         QVariant    mValue;
     };
 public:
-    StatusIndicator();
-    StatusIndicator(const QString& name,const QVariant& value,const QString& description = "");
-
-    StatusIndicator& operator=(const StatusIndicator& indicator);
-
+    CustomItemData();
     void addProperty(const QString& propertyName, const QVariant& propertyValue);
     void setProperty(const QString& propertyName, const QVariant& propertyValue);
-
     QVariant getPropertyValue(const QString& propertyName) const;
     QVariant getPropertyValue(int propertyIndex) const;
+    int getPropertiesCount() const;
+
 private:
-    QVector<IndicatorProperty> mProperties;
+    QVector<CustomItemProperty> mProperties;
     QMap<QString,int> mIndexes;
     int mPropertiesCount{0};
 };
 
-Q_DECLARE_METATYPE(StatusIndicator)
-
-#endif // STATUSINDICATOR_H
+#endif //CUSTOMITEM_H
