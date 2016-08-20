@@ -1,4 +1,5 @@
 #include "CustomItemDelegate.h"
+#include "CustomItemData.h"
 
 CustomItemDelegate::CustomItemDelegate(QObject *parent)
     :QStyledItemDelegate(parent)
@@ -15,16 +16,14 @@ void CustomItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 {
     if(!index.isValid())
         return;
-    qDebug()<<"index="<<index.column()<<index.row();
+
     mWidget->setCurrentPropertyIndex( index.column() );
-    qDebug()<<"property ok";
     QVariant var=index.model()->data(index);
-    //qDebug()<<"var"<<var;
 
     if(var.isValid())
     {
-        CustomItem* item=var.value<CustomItem*>();
-        mWidget->setIndicator(item);
+        CustomItemData data=var.value<CustomItemData>();
+        mWidget->setData(data);
         mWidget->setFixedSize(option.rect.width(),option.rect.height());
         QPixmap pixmap(mWidget->size());
         mWidget->render(&pixmap);
@@ -47,15 +46,15 @@ QWidget *CustomItemDelegate::createEditor(QWidget *parent, const QStyleOptionVie
 void CustomItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
     CustomItemWidget* pEditor=qobject_cast<CustomItemWidget*>(editor);
-    CustomItem* item = index.model()->data(index).value<CustomItem*>();
+    CustomItemData data = index.model()->data(index).value<CustomItemData>();
     pEditor->setCurrentPropertyIndex( index.column() );
-    pEditor->setIndicator(item);
+    pEditor->setData(data);
 }
 
 void CustomItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
     CustomItemWidget* pEditor=qobject_cast<CustomItemWidget*>(editor);
-    model->setData(index,QVariant().fromValue(pEditor->getIndicator()));
+    model->setData(index,QVariant().fromValue(pEditor->getData()));
 }
 
 void CustomItemDelegate::slotCommit()

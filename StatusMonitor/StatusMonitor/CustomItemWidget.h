@@ -5,7 +5,7 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 
-#include "CustomItem.h"
+#include "CustomItemData.h"
 #include "CustomItemWidgets.h"
 #include "CustomItemTypes.h"
 
@@ -14,11 +14,11 @@ class CustomItemWidget : public QWidget
     Q_OBJECT
 public:
     explicit CustomItemWidget(QWidget *parent = 0);
-    explicit CustomItemWidget(CustomItem* item,QWidget *parent = 0);
+    explicit CustomItemWidget(CustomItemData data,QWidget *parent = 0);
 
-    void setIndicator(CustomItem* item);
+    void setData(CustomItemData data);
 
-    CustomItem* getIndicator() const;
+    CustomItemData getData() const;
 
     void setCurrentPropertyIndex(int propertyIndex);
 
@@ -30,7 +30,7 @@ signals:
 public slots:
 
 private:
-    CustomItem* mIndicator;
+    CustomItemData mData;
     int mCurrentPropertyIndex;
 
     void build();

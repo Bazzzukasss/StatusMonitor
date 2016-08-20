@@ -5,22 +5,22 @@ CustomItemWidget::CustomItemWidget(QWidget *parent):QWidget(parent)
     init();
 }
 
-CustomItemWidget::CustomItemWidget(CustomItem* item, QWidget *parent)
+CustomItemWidget::CustomItemWidget(CustomItemData data, QWidget *parent)
     :QWidget(parent)
 {
     init();
-    setIndicator(item);
+    setData(data);
 }
 
-void CustomItemWidget::setIndicator(CustomItem* item)
+void CustomItemWidget::setData(CustomItemData data)
 {
-    mIndicator = item;
+    mData = data;
     build();
 }
 
-CustomItem* CustomItemWidget::getIndicator() const
+CustomItemData CustomItemWidget::getData() const
 {
-    return mIndicator;
+    return mData;
 }
 
 void CustomItemWidget::setCurrentPropertyIndex(int propertyIndex)
@@ -38,9 +38,7 @@ QSize CustomItemWidget::getSize()
 
 void CustomItemWidget::build()
 {
-    QVariant value;
-    if(mIndicator)
-        value = mIndicator->getPropertyValue(mCurrentPropertyIndex);
+    QVariant value = mData.getPropertyValue(mCurrentPropertyIndex);
 
     QString typeName(value.typeName());
 

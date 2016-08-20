@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this,   SIGNAL(signalBuildListMonitorUpdate(CustomItem*)),  ui->buildlistMonitor,   SLOT(slotUpdateItems(CustomItem*)));
 
     slotTimeout();
-    mTimer->start(200);
+    //mTimer->start(200);
 }
 
 MainWindow::~MainWindow()
@@ -59,9 +59,9 @@ void MainWindow::slotTimeout()
     item->addItem( new CustomItem("SIDouble:",QVariant().fromValue(si_double),"desc2"));
     item->addItem( new CustomItem("SIProgress:",QVariant().fromValue(si_progress),"desc3"));
 
-    rootItem->addItem( new CustomItem("Boolean:",booleanValue,"desc10"));
-    rootItem->addItem( new CustomItem("String:",stringValue,"desc11"));
+
     rootItem->addItem( item );
+
     rootItem->addItem( new CustomItem("SIString:",QVariant().fromValue(si_string),"desc1"));
     rootItem->addItem( new CustomItem("SIDouble:",QVariant().fromValue(si_double),"desc2"));
     rootItem->addItem( new CustomItem("SIProgress:",QVariant().fromValue(si_progress),"desc3"));
@@ -69,6 +69,7 @@ void MainWindow::slotTimeout()
     rootItem->addItem( new CustomItem("SILCD:",QVariant().fromValue(si_lcd),"desc5"));
     rootItem->addItem( new CustomItem("SIBoolean:",QVariant().fromValue(si_boolean),"desc6"));
     rootItem->addItem( new CustomItem("SIBars:",QVariant().fromValue( si_bars ),"desc7"));
+    rootItem->addItem( new CustomItem("SIGraph:",QVariant().fromValue( si_graph ),"desc7"));
     rootItem->addItem( new CustomItem("Integer:",integerValue,"desc8"));
     rootItem->addItem( new CustomItem("Double:",doubleValue,"desc9"));
     rootItem->addItem( new CustomItem("Boolean:",booleanValue,"desc10"));

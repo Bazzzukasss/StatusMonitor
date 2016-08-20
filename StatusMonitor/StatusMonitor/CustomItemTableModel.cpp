@@ -21,8 +21,10 @@ bool CustomItemTableModel::setData(const QModelIndex &index, const QVariant &val
         return false;
     if( index.row()<0 || index.row()>mItems.count() || index.column()<0 || index.column()>mHeaders.count()-1)
         return false;
-    CustomItem& item = mItems[index.row()];
-    item=value.value<CustomItem>();
+
+    CustomItemData data=value.value<CustomItemData>();
+    mItems[index.row()].setData(data);
+
     emit dataChanged(index,index);
     return true;
 }
@@ -60,8 +62,8 @@ QVariant CustomItemTableModel::data(const QModelIndex &index, int role) const
     if( role != Qt::DisplayRole && role!= Qt::EditRole)
         return QVariant();
 
-    CustomItem* item = &mItems.at(index.row());
-    return QVariant().fromValue(item);
+    CustomItemData data = mItems.at(index.row()).getData();
+    return QVariant().fromValue(data);
 }
 
 QVariant CustomItemTableModel::headerData(int section, Qt::Orientation orientation, int role) const

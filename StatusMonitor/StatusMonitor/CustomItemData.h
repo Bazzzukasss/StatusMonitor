@@ -32,4 +32,6 @@ private:
     int mPropertiesCount{0};
 };
 
+Q_DECLARE_METATYPE(CustomItemData)
+Q_DECLARE_METATYPE(CustomItemData*)
 #endif //CUSTOMITEM_H

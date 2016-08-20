@@ -19,6 +19,9 @@ public:
     QVariant getPropertyValue(const QString& propertyName) const;
     QVariant getPropertyValue(int propertyIndex) const;
 
+    const CustomItemData& getData() const;
+    void setData(const CustomItemData& data);
+
     CustomItem *getParent();
     void setParent(CustomItem *parent);
 

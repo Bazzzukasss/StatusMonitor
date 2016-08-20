@@ -10,7 +10,6 @@ CustomItem::CustomItem()
 
 CustomItem::~CustomItem()
 {
-    qDebug()<<"qDeleteAll"<<mItems.count();
     qDeleteAll(mItems);
 }
 
@@ -56,6 +55,16 @@ QVariant CustomItem::getPropertyValue(const QString &propertyName) const
 QVariant CustomItem::getPropertyValue(int propertyIndex) const
 {
     return mData.getPropertyValue(propertyIndex);
+}
+
+const CustomItemData &CustomItem::getData() const
+{
+    return mData;
+}
+
+void CustomItem::setData(const CustomItemData &data)
+{
+    mData = data;
 }
 
 CustomItem *CustomItem::getParent()
