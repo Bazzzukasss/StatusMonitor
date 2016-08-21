@@ -3,49 +3,40 @@
 StatusMonitor::StatusMonitor(QWidget *parent)
     :QFrame(parent)
 {
+    init();
     build();
 }
-void StatusMonitor::build()
+
+void StatusMonitor::init()
 {
-    mModel = new CustomItemTableModel(this);
-    mDelegate = new CustomItemDelegate(this);
-    mTableView = new QTableView(this);
+    mView = new CustomItemTableView(this);
     mCaption = new QRadioButton("Status Monitor",this);
     mLayout = new QVBoxLayout(this);
+}
 
+void StatusMonitor::build()
+{
     mLayout->setMargin(0);
     mLayout->setSpacing(0);
     mLayout->addWidget(mCaption);
-    mLayout->addWidget(mTableView);
-
-    mTableView->setModel(mModel);
-    mTableView->setItemDelegate(mDelegate);
-    mTableView->setShowGrid(false);
-    mTableView->verticalHeader()->hide();
-
+    mLayout->addWidget(mView);
     mCaption->setChecked(false);
-    resizeViewToContents();
-}
-void StatusMonitor::resizeViewToContents()
-{
-    mTableView->resizeColumnsToContents();
-    mTableView->resizeRowsToContents();
+    mView->resizeViewToContents();
 }
 
 void StatusMonitor::setHeaders(const QVector<QString> &headers)
 {
-    mModel->setHeaders(headers);
-    resizeViewToContents();
+    mView->setHeaders(headers);
 }
 
 void StatusMonitor::setItems(CustomItem* rootItem)
 {
-    mModel->setItems(rootItem);
-    resizeViewToContents();
+    mView->setItems(rootItem);
+
 }
 void StatusMonitor::updateItems(CustomItem* rootItem)
 {
-    mModel->setItems(rootItem);
+    mView->updateItems(rootItem);
 }
 //SLOTS
 void StatusMonitor::slotSetHeaders(const QVector<QString> &headers)
@@ -55,7 +46,7 @@ void StatusMonitor::slotSetHeaders(const QVector<QString> &headers)
 
 void StatusMonitor::slotResizeViewToContents()
 {
-    resizeViewToContents();
+    mView->resizeViewToContents();
 }
 
 void StatusMonitor::slotUpdateItems(CustomItem* rootItem)

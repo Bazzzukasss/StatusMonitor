@@ -6,14 +6,11 @@
 #include <QFrame>
 #include <QString>
 #include <QVector>
-#include <QTableView>
-#include <QTreeView>
 #include <QRadioButton>
 #include <QVBoxLayout>
 #include <QHeaderView>
 
-#include "CustomItemTableModel.h"
-#include "CustomItemDelegate.h"
+#include "CustomItemTableView.h"
 
 class StatusMonitor : public QFrame
 {
@@ -23,7 +20,6 @@ public:
     void updateItems(CustomItem* rootItem);
     void setItems(CustomItem* rootItem);
     void setHeaders(const QVector<QString>& headers);
-    void resizeViewToContents();
 
 public slots:
     void slotUpdateItems(CustomItem* rootItem);
@@ -32,14 +28,12 @@ public slots:
     void slotResizeViewToContents();
 
 private:
-    CustomItemTableModel* mModel;
-    CustomItemDelegate* mDelegate;
-
-    QTableView* mTableView;
+    CustomItemTableView* mView;
     QRadioButton* mCaption;
     QVBoxLayout* mLayout;    
 
     void build();
+    void init();
 };
 
 #endif // STATUSMONITOR_H

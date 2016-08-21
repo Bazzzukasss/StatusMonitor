@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     CustomItemWidgets.cpp \
     CustomItemData.cpp \
     CustomItemTreeModel.cpp \
-    BuildListMonitor.cpp
+    BuildListMonitor.cpp \
+    CustomItemTableView.cpp \
+    CustomItemTreeView.cpp
 
 HEADERS  += mainwindow.h \
     StatusMonitor.h \
@@ -36,7 +38,9 @@ HEADERS  += mainwindow.h \
     CustomItemTypes.h \
     CustomItemData.h \
     CustomItemTreeModel.h \
-    BuildListMonitor.h
+    BuildListMonitor.h \
+    CustomItemTableView.h \
+    CustomItemTreeView.h
 
 FORMS    += mainwindow.ui
 

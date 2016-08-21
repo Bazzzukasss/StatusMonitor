@@ -24,6 +24,7 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
     void setItems(CustomItem* rootItem);
+    void setItems(const QList<CustomItem>& items);
     void setHeaders(const QVector<QString>& headers);
 
 private:

@@ -83,8 +83,19 @@ void CustomItemTableModel::setItems(CustomItem* rootItem)
     mItems.clear();
 
     for(auto it : rootItem->getItems())
-        mItems.append(*it);
+    {
+        CustomItem item;
+        item.setData(it->getData());
+        mItems.append(item);
+    }
     endResetModel();
+    if(rootItem != 0 )
+        delete rootItem;
+}
+
+void CustomItemTableModel::setItems(const QList<CustomItem> &items)
+{
+    mItems = items;
 }
 
 void CustomItemTableModel::setHeaders(const QVector<QString> &headers)

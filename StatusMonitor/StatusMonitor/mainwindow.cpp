@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this,   SIGNAL(signalStatusMonitorUpdate(CustomItem*)),     ui->statusMonitor,      SLOT(slotUpdateItems(CustomItem*)));
     connect(this,   SIGNAL(signalBuildListMonitorUpdate(CustomItem*)),  ui->buildlistMonitor,   SLOT(slotUpdateItems(CustomItem*)));
 
-    slotTimeout();
-    //mTimer->start(200);
+    //slotTimeout();
+    mTimer->start(200);
 }
 
 MainWindow::~MainWindow()
@@ -53,12 +53,10 @@ void MainWindow::slotTimeout()
     SIGraph si_graph(QVector<double>().fromStdVector(stdVector));
 
     CustomItem* rootItem = new CustomItem();
-#if(1)
-    CustomItem* item = new CustomItem("SIString:",QVariant().fromValue(si_string),"desc1");
 
+    CustomItem* item = new CustomItem("SIString:",QVariant().fromValue(si_string),"desc1");
     item->addItem( new CustomItem("SIDouble:",QVariant().fromValue(si_double),"desc2"));
     item->addItem( new CustomItem("SIProgress:",QVariant().fromValue(si_progress),"desc3"));
-
 
     rootItem->addItem( item );
 
@@ -75,22 +73,8 @@ void MainWindow::slotTimeout()
     rootItem->addItem( new CustomItem("Boolean:",booleanValue,"desc10"));
     rootItem->addItem( new CustomItem("String:",stringValue,"desc11"));
 
-#else
-
-    rootItem->addItem( new CustomItem("SIString:",QVariant().fromValue(si_string),"desc1"));
-    rootItem->addItem( new CustomItem("SIDouble:",QVariant().fromValue(si_double),"desc2"));
-    rootItem->addItem( new CustomItem("SIProgress:",QVariant().fromValue(si_progress),"desc3"));
-    rootItem->addItem( new CustomItem("SIInteger:",QVariant().fromValue(si_integer),"desc4"));
-    rootItem->addItem( new CustomItem("SILCD:",QVariant().fromValue(si_lcd),"desc5"));
-    rootItem->addItem( new CustomItem("SIBoolean:",QVariant().fromValue(si_boolean),"desc6"));
-    rootItem->addItem( new CustomItem("SIBars:",QVariant().fromValue( si_bars ),"desc7"));
-    rootItem->addItem( new CustomItem("Integer:",integerValue,"desc8"));
-    rootItem->addItem( new CustomItem("Double:",doubleValue,"desc9"));
-    rootItem->addItem( new CustomItem("Boolean:",booleanValue,"desc10"));
-    rootItem->addItem( new CustomItem("String:",stringValue,"desc11"));
-#endif
     emit signalStatusMonitorUpdate(rootItem);
-    emit signalBuildListMonitorUpdate(rootItem);
+    //emit signalBuildListMonitorUpdate(rootItem);
 
     stage = !stage;
 }

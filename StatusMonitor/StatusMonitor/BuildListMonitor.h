@@ -12,35 +12,30 @@
 #include <QVBoxLayout>
 #include <QHeaderView>
 
-#include "CustomItemTreeModel.h"
-#include "CustomItemDelegate.h"
+#include "CustomItemTreeView.h"
 
 class BuildListMonitor : public QFrame
 {
     Q_OBJECT
 public:
     BuildListMonitor(QWidget* parent = 0);
-
+    void updateItems(CustomItem* rootItem);
+    void setItems(CustomItem* rootItem);
     void setHeaders(const QVector<QString>& headers);
-    void setItems(CustomItem* items);
-    void updateItems(CustomItem* items);
-    void resizeViewToContents();
 
 public slots:
-    void slotSetItems(CustomItem* items);
-    void slotUpdateItems(CustomItem* items);
+    void slotUpdateItems(CustomItem* rootItem);
+    void slotSetItems(CustomItem* rootItem);
     void slotSetHeaders(const QVector<QString>& headers);
     void slotResizeViewToContents();
 
 private:
-    CustomItemTreeModel* mModel;
-    CustomItemDelegate* mDelegate;
-
-    QTreeView* mTreeView;
+    CustomItemTreeView* mView;
     QRadioButton* mCaption;
     QVBoxLayout* mLayout;
 
     void build();
+    void init();
 };
 
 #endif // BUILDLISTMONITOR_H

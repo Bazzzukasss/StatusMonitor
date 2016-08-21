@@ -3,24 +3,42 @@
 BuildListMonitor::BuildListMonitor(QWidget *parent)
     :QFrame(parent)
 {
+    init();
     build();
+}
+
+void BuildListMonitor::init()
+{
+    mView = new CustomItemTreeView(this);
+    mCaption = new QRadioButton("Status Monitor",this);
+    mLayout = new QVBoxLayout(this);
+}
+
+void BuildListMonitor::build()
+{
+    mLayout->setMargin(0);
+    mLayout->setSpacing(0);
+    mLayout->addWidget(mCaption);
+    mLayout->addWidget(mView);
+    mCaption->setChecked(false);
+    mView->resizeViewToContents();
 }
 
 void BuildListMonitor::setHeaders(const QVector<QString> &headers)
 {
-    mModel->setHeaders(headers);
-    resizeViewToContents();
+    mView->setHeaders(headers);
 }
 
-void BuildListMonitor::setItems(CustomItem* items)
+void BuildListMonitor::setItems(CustomItem* rootItem)
 {
-    mModel->setItems(items);
-    resizeViewToContents();
+    mView->setItems(rootItem);
+
 }
-void BuildListMonitor::updateItems(CustomItem* items)
+void BuildListMonitor::updateItems(CustomItem* rootItem)
 {
-    mModel->setItems(items);
+    mView->updateItems(rootItem);
 }
+//SLOTS
 void BuildListMonitor::slotSetHeaders(const QVector<QString> &headers)
 {
     setHeaders(headers);
@@ -28,39 +46,18 @@ void BuildListMonitor::slotSetHeaders(const QVector<QString> &headers)
 
 void BuildListMonitor::slotResizeViewToContents()
 {
-    resizeViewToContents();
+    mView->resizeViewToContents();
 }
-void BuildListMonitor::slotSetItems(CustomItem* items)
+
+void BuildListMonitor::slotUpdateItems(CustomItem* rootItem)
 {
-    setItems(items);
-}
-void BuildListMonitor::slotUpdateItems(CustomItem* items)
-{
-    updateItems(items);
+    updateItems(rootItem);
     mCaption->setChecked( !mCaption->isChecked() );
 }
-
-void BuildListMonitor::resizeViewToContents()
+void BuildListMonitor::slotSetItems(CustomItem* rootItem)
 {
-
+    setItems(rootItem);
 }
 
-void BuildListMonitor::build()
-{
-    mModel = new CustomItemTreeModel(this);
-    mDelegate = new CustomItemDelegate(this);
-    mTreeView = new QTreeView(this);
-    mCaption = new QRadioButton("Build List Monitor",this);
-    mLayout = new QVBoxLayout(this);
 
-    mLayout->setMargin(0);
-    mLayout->setSpacing(0);
-    mLayout->addWidget(mCaption);
-    mLayout->addWidget(mTreeView);
 
-    mTreeView->setModel(mModel);
-    mTreeView->setItemDelegate(mDelegate);
-
-    mCaption->setChecked(false);
-    resizeViewToContents();
-}
