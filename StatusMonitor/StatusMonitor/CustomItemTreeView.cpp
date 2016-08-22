@@ -30,11 +30,30 @@ void CustomItemTreeView::resizeViewToContents()
     //resizeRowsToContents();
 }
 
+void CustomItemTreeView::slotCurrentChanged(QModelIndex currentIndex, QModelIndex previosIndex)
+{
+    if(!currentIndex.isValid())
+        return;
+
+    QVariant var=currentIndex.model()->data(currentIndex);
+    CustomItemData itemData=var.value<CustomItemData>();
+
+    emit signalCurrentChanged(itemData, currentIndex.row(), currentIndex.column());
+}
+
 void CustomItemTreeView::init()
 {
     mModel = new CustomItemTreeModel(this);
     mDelegate = new CustomItemDelegate(this);
+    mSelectionModel = new QItemSelectionModel(mModel,this);
+
     setModel(mModel);
     setItemDelegate(mDelegate);
     resizeViewToContents();
+
+    setSelectionModel(mSelectionModel);
+    setAlternatingRowColors(true);
+    setSelectionBehavior(QAbstractItemView::SelectItems);
+
+    connect(mSelectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)),   this,   SLOT(slotCurrentChanged(QModelIndex,QModelIndex)));
 }

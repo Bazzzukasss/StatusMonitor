@@ -19,7 +19,7 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="StatusMonitor" name="statusMonitor">
+     <widget class="CustomItemTableMonitor" name="tableMonitor">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -38,7 +38,7 @@
      </widget>
     </item>
     <item>
-     <widget class="BuildListMonitor" name="buildlistMonitor">
+     <widget class="CustomItemTreeMonitor" name="treeMonitor">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -78,15 +78,15 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>StatusMonitor</class>
+   <class>CustomItemTableMonitor</class>
    <extends>QFrame</extends>
-   <header location="global">StatusMonitor.h</header>
+   <header location="global">CustomItemTableMonitor.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>BuildListMonitor</class>
+   <class>CustomItemTreeMonitor</class>
    <extends>QFrame</extends>
-   <header location="global">BuildListMonitor.h</header>
+   <header location="global">CustomItemTreeMonitor.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

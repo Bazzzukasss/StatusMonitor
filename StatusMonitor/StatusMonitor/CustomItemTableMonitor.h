@@ -1,41 +1,47 @@
-#ifndef STATUSMONITOR_H
-#define BUILDLISTMONITOR_H
+#ifndef CUSTOMITEMTABLEMONITOR_H
+#define CUSTOMITEMTABLEMONITOR_H
 
 #include <QObject>
 #include <QWidget>
 #include <QFrame>
 #include <QString>
 #include <QVector>
-#include <QTableView>
-#include <QTreeView>
 #include <QRadioButton>
 #include <QVBoxLayout>
 #include <QHeaderView>
+#include <QList>
 
-#include "CustomItemTreeView.h"
+#include "CustomItemTableView.h"
 
-class BuildListMonitor : public QFrame
+class CustomItemTableMonitor : public QFrame
 {
     Q_OBJECT
 public:
-    BuildListMonitor(QWidget* parent = 0);
+    CustomItemTableMonitor(QWidget* parent = 0);
     void updateItems(CustomItem* rootItem);
+    void updateItems(const QList<CustomItem>& items);
     void setItems(CustomItem* rootItem);
+    void setItems(const QList<CustomItem>& items);
     void setHeaders(const QVector<QString>& headers);
 
 public slots:
     void slotUpdateItems(CustomItem* rootItem);
+    void slotUpdateItems(const QList<CustomItem>& items);
     void slotSetItems(CustomItem* rootItem);
+    void slotSetItems(const QList<CustomItem>& items);
     void slotSetHeaders(const QVector<QString>& headers);
     void slotResizeViewToContents();
 
+signals:
+    void signalCurrentChanged(CustomItemData data,int row, int column);
+
 private:
-    CustomItemTreeView* mView;
+    CustomItemTableView* mView;
     QRadioButton* mCaption;
-    QVBoxLayout* mLayout;
+    QVBoxLayout* mLayout;    
 
     void build();
     void init();
 };
 
-#endif // BUILDLISTMONITOR_H
+#endif // CUSTOMITEMTABLEMONITOR_H

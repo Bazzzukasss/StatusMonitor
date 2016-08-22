@@ -29,6 +29,8 @@ void CustomItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         mWidget->render(&pixmap);
         painter->drawPixmap(option.rect,pixmap);
     }
+    //QStyledItemDelegate::paint(painter,option,index);
+
 }
 
 QSize CustomItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const

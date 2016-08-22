@@ -19,9 +19,11 @@ public:
     ~MainWindow();
 public slots:
     void slotTimeout();
+    void slotCurrentChanged(CustomItemData data,int row,int column);
 signals:
-    void signalStatusMonitorUpdate(CustomItem* items);
-    void signalBuildListMonitorUpdate(CustomItem* items);
+    void signalStatusMonitorUpdate(const QList<CustomItem>& items);
+    void signalStatusMonitorUpdate(CustomItem* rootItem);
+    void signalBuildListMonitorUpdate(CustomItem* rootItem);
 private:
     void initModel();
     Ui::MainWindow *ui;

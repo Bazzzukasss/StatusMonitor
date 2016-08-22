@@ -1,22 +1,24 @@
-#ifndef STATUSMONITOR_H
-#define STATUSMONITOR_H
+#ifndef CUSTOMITEMTREEMONITOR_H
+#define CUSTOMITEMTREEMONITOR_H
 
 #include <QObject>
 #include <QWidget>
 #include <QFrame>
 #include <QString>
 #include <QVector>
+#include <QTableView>
+#include <QTreeView>
 #include <QRadioButton>
 #include <QVBoxLayout>
 #include <QHeaderView>
 
-#include "CustomItemTableView.h"
+#include "CustomItemTreeView.h"
 
-class StatusMonitor : public QFrame
+class CustomItemTreeMonitor : public QFrame
 {
     Q_OBJECT
 public:
-    StatusMonitor(QWidget* parent = 0);
+    CustomItemTreeMonitor(QWidget* parent = 0);
     void updateItems(CustomItem* rootItem);
     void setItems(CustomItem* rootItem);
     void setHeaders(const QVector<QString>& headers);
@@ -27,13 +29,16 @@ public slots:
     void slotSetHeaders(const QVector<QString>& headers);
     void slotResizeViewToContents();
 
+signals:
+    void signalCurrentChanged(CustomItemData data,int row, int column);
+
 private:
-    CustomItemTableView* mView;
+    CustomItemTreeView* mView;
     QRadioButton* mCaption;
-    QVBoxLayout* mLayout;    
+    QVBoxLayout* mLayout;
 
     void build();
     void init();
 };
 
-#endif // STATUSMONITOR_H
+#endif // CUSTOMITEMTREEMONITOR_H

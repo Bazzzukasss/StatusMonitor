@@ -16,9 +16,17 @@ public:
     void setItems(CustomItem* rootItem);
     void updateItems(CustomItem* rootItem);
     void resizeViewToContents();
+
+public slots:
+    void slotCurrentChanged(QModelIndex currentIndex,QModelIndex previosIndex);
+
+signals:
+    void signalCurrentChanged(CustomItemData data,int row, int column);
+
 private:
     CustomItemTreeModel* mModel;
     CustomItemDelegate* mDelegate;
+    QItemSelectionModel* mSelectionModel;
     void init();
 };
 

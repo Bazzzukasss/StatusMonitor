@@ -95,7 +95,9 @@ void CustomItemTableModel::setItems(CustomItem* rootItem)
 
 void CustomItemTableModel::setItems(const QList<CustomItem> &items)
 {
+    beginResetModel();
     mItems = items;
+    endResetModel();
 }
 
 void CustomItemTableModel::setHeaders(const QVector<QString> &headers)

@@ -14,7 +14,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    StatusMonitor.cpp \
     qcustomplot.cpp \
     CustomItem.cpp \
     CustomItemTableModel.cpp \
@@ -23,12 +22,12 @@ SOURCES += main.cpp\
     CustomItemWidgets.cpp \
     CustomItemData.cpp \
     CustomItemTreeModel.cpp \
-    BuildListMonitor.cpp \
     CustomItemTableView.cpp \
-    CustomItemTreeView.cpp
+    CustomItemTreeView.cpp \
+    CustomItemTableMonitor.cpp \
+    CustomItemTreeMonitor.cpp
 
 HEADERS  += mainwindow.h \
-    StatusMonitor.h \
     qcustomplot.h \
     CustomItem.h \
     CustomItemTableModel.h \
@@ -38,9 +37,10 @@ HEADERS  += mainwindow.h \
     CustomItemTypes.h \
     CustomItemData.h \
     CustomItemTreeModel.h \
-    BuildListMonitor.h \
     CustomItemTableView.h \
-    CustomItemTreeView.h
+    CustomItemTreeView.h \
+    CustomItemTableMonitor.h \
+    CustomItemTreeMonitor.h
 
 FORMS    += mainwindow.ui
 
