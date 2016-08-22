@@ -22,7 +22,7 @@ public:
     const CustomItemData& getData() const;
     void setData(const CustomItemData& data);
 
-    CustomItem *getParent();
+    CustomItem *getParent() const;
     void setParent(CustomItem *parent);
 
     CustomItem *getItem(int getNumber);

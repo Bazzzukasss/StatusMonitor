@@ -13,7 +13,7 @@ void CustomItemTreeMonitor::init()
     mCaption = new QRadioButton("Tree Monitor",this);
     mLayout = new QVBoxLayout(this);
 
-    connect(mView, SIGNAL(signalCurrentChanged(CustomItemData,int,int)), this,   SIGNAL(signalCurrentChanged(CustomItemData,int,int)));
+    connect(mView, SIGNAL(signalCurrentChanged(const CustomItem*,int,int)), this,   SIGNAL(signalCurrentChanged(const CustomItem*,int,int)));
 }
 
 void CustomItemTreeMonitor::build()
@@ -30,6 +30,16 @@ void CustomItemTreeMonitor::build()
 void CustomItemTreeMonitor::setHeaders(const QVector<QString> &headers)
 {
     mView->setHeaders(headers);
+}
+
+void CustomItemTreeMonitor::setCaption(const QString &text)
+{
+    mCaption->setText(text);
+}
+
+void CustomItemTreeMonitor::setCaptionVisible(bool isVisible)
+{
+    mCaption->setVisible(isVisible);
 }
 
 void CustomItemTreeMonitor::setItems(CustomItem* rootItem)

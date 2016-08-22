@@ -3,9 +3,6 @@
 
 CustomItem::CustomItem()
 {
-    addProperty("name","name");
-    addProperty("value","value");
-    addProperty("description","description");
 }
 
 CustomItem::~CustomItem()
@@ -67,7 +64,7 @@ void CustomItem::setData(const CustomItemData &data)
     mData = data;
 }
 
-CustomItem *CustomItem::getParent()
+CustomItem *CustomItem::getParent() const
 {
     return mParent;
 }

@@ -21,7 +21,7 @@ public slots:
     void slotCurrentChanged(QModelIndex currentIndex,QModelIndex previosIndex);
 
 signals:
-    void signalCurrentChanged(CustomItemData data,int row, int column);
+    void signalCurrentChanged(const CustomItem* item,int row, int column);
 
 private:
     CustomItemTreeModel* mModel;

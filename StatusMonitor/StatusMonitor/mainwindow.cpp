@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this,               SIGNAL(signalStatusMonitorUpdate(const QList<CustomItem>&)),        ui->tableMonitor,       SLOT(slotUpdateItems(const QList<CustomItem>&)));
     connect(this,               SIGNAL(signalBuildListMonitorUpdate(CustomItem*)),                  ui->treeMonitor,        SLOT(slotUpdateItems(CustomItem*)));
     connect(ui->tableMonitor,   SIGNAL(signalCurrentChanged(CustomItemData,int,int)),               this,                   SLOT(slotCurrentChanged(CustomItemData,int,int)));
-    connect(ui->treeMonitor,    SIGNAL(signalCurrentChanged(CustomItemData,int,int)),               this,                   SLOT(slotCurrentChanged(CustomItemData,int,int)));
+    connect(ui->treeMonitor,    SIGNAL(signalCurrentChanged(const CustomItem*,int,int)),            this,                   SLOT(slotCurrentChanged(const CustomItem*,int,int)));
     slotTimeout();
     //mTimer->start(200);
 }
@@ -91,6 +91,10 @@ void MainWindow::slotTimeout()
     stage = !stage;
 }
 
+void MainWindow::slotCurrentChanged(const CustomItem* item, int row, int column)
+{
+    qDebug()<<"row="<<row<<"column="<<column<<"data:"<<item->getData().getPropertyValue("name");
+}
 void MainWindow::slotCurrentChanged(CustomItemData data, int row, int column)
 {
     qDebug()<<"row="<<row<<"column="<<column<<"data:"<<data.getPropertyValue("name");

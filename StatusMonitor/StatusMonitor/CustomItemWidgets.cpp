@@ -6,7 +6,7 @@ QLCDNumberSI::QLCDNumberSI(QWidget *parent)
 {
     setFrameShape(QLCDNumber::NoFrame);
     setSegmentStyle(QLCDNumber::Flat);
-    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
 }
 
 void QLCDNumberSI::setValue(double value)
@@ -48,7 +48,7 @@ QLineEditSI::QLineEditSI(QWidget *parent)
     :QLineEdit(parent)
 {
     setFrame(false);
-    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
 }
 
 void QLineEditSI::setValue(const QString &value)
@@ -71,7 +71,7 @@ QSpinBoxSI::QSpinBoxSI(QWidget *parent)
     setMaximum(std::numeric_limits<int>::max());
     setMinimum(std::numeric_limits<int>::min());
     setSpecialValueText(locale().toString(std::numeric_limits<int>::quiet_NaN()));
-    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
 }
 
 void QSpinBoxSI::setSIValue(const QVariant &value)
@@ -98,7 +98,7 @@ QDoubleSpinBoxSI::QDoubleSpinBoxSI(QWidget *parent)
     setMaximum(std::numeric_limits<double>::max());
     setMinimum(std::numeric_limits<double>::min());
     setSpecialValueText(locale().toString(std::numeric_limits<double>::quiet_NaN()));
-    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
 }
 
 void QDoubleSpinBoxSI::setSIValue(const QVariant &value)
@@ -120,7 +120,7 @@ void QDoubleSpinBoxSI::setSIValue(const QVariant &value)
 QRadioButtonSI::QRadioButtonSI(QWidget *parent)
     :QRadioButton(parent)
 {
-    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
 }
 
 void QRadioButtonSI::setSIValue(const QVariant &value)

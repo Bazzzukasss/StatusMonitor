@@ -35,10 +35,9 @@ void CustomItemTreeView::slotCurrentChanged(QModelIndex currentIndex, QModelInde
     if(!currentIndex.isValid())
         return;
 
-    QVariant var=currentIndex.model()->data(currentIndex);
-    CustomItemData itemData=var.value<CustomItemData>();
-
-    emit signalCurrentChanged(itemData, currentIndex.row(), currentIndex.column());
+    CustomItem* item = dynamic_cast<const CustomItemTreeModel*>(currentIndex.model())->getItem(currentIndex);
+    if(item)
+        emit signalCurrentChanged(item, currentIndex.row(), currentIndex.column());
 }
 
 void CustomItemTreeView::init()
@@ -52,7 +51,7 @@ void CustomItemTreeView::init()
     resizeViewToContents();
 
     setSelectionModel(mSelectionModel);
-    setAlternatingRowColors(true);
+    //setAlternatingRowColors(true);
     setSelectionBehavior(QAbstractItemView::SelectItems);
 
     connect(mSelectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)),   this,   SLOT(slotCurrentChanged(QModelIndex,QModelIndex)));

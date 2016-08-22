@@ -22,7 +22,8 @@ public:
     void updateItems(CustomItem* rootItem);
     void setItems(CustomItem* rootItem);
     void setHeaders(const QVector<QString>& headers);
-
+    void setCaption(const QString& text);
+    void setCaptionVisible(bool isVisible);
 public slots:
     void slotUpdateItems(CustomItem* rootItem);
     void slotSetItems(CustomItem* rootItem);
@@ -30,7 +31,7 @@ public slots:
     void slotResizeViewToContents();
 
 signals:
-    void signalCurrentChanged(CustomItemData data,int row, int column);
+    void signalCurrentChanged(const CustomItem* item,int row, int column);
 
 private:
     CustomItemTreeView* mView;
