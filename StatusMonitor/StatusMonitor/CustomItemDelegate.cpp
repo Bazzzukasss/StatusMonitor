@@ -24,7 +24,7 @@ void CustomItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     {
         QString typeName(var.typeName());
 
-        if(typeName == "CustomItemData")
+        //if(typeName == "CustomItemData")
         {
             CustomItemData data=var.value<CustomItemData>();
             mWidget->setStyleOption(option);
@@ -34,16 +34,16 @@ void CustomItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
             mWidget->render(&pixmap);
             painter->drawPixmap(option.rect,pixmap);
         }
-        else
-            QStyledItemDelegate::paint(painter,option,index);
+        //else
+            //QStyledItemDelegate::paint(painter,option,index);
     }
 }
-
+/*
 QSize CustomItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     return mWidget->getSize();
 }
-
+*/
 QWidget *CustomItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     CustomItemWidget* pEditor=new CustomItemWidget(parent);

@@ -55,7 +55,6 @@ void CustomItemWidget::build()
     {
     case QVariant::Type::String :
         mStringWidget->setText( value.toString() );
-        mStringWidget->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
         mCurrentWidget = mStringWidget;
         break;
 
@@ -64,7 +63,6 @@ void CustomItemWidget::build()
         mIntWidget->setMinimum(std::numeric_limits<int>::min());
         mIntWidget->setValue( value.toInt() );
         mIntWidget->specialValueText();
-        mIntWidget->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
         mCurrentWidget = mIntWidget;
         break;
 
@@ -73,13 +71,11 @@ void CustomItemWidget::build()
         mDoubleWidget->setMinimum(std::numeric_limits<int>::min());
         mDoubleWidget->setValue( value.toDouble() );
         mDoubleWidget->specialValueText();
-        mDoubleWidget->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
         mCurrentWidget = mDoubleWidget;
         break;
 
     case QVariant::Type::Bool :
         mBooleanWidget->setChecked( value.toBool() );
-        mBooleanWidget->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
         mCurrentWidget = mBooleanWidget;
         break;
 
