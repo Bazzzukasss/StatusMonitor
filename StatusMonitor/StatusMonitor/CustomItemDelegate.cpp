@@ -22,15 +22,21 @@ void CustomItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
     if(var.isValid())
     {
-        CustomItemData data=var.value<CustomItemData>();
-        mWidget->setData(data);
-        mWidget->setFixedSize(option.rect.width(),option.rect.height());
-        QPixmap pixmap(mWidget->size());
-        mWidget->render(&pixmap);
-        painter->drawPixmap(option.rect,pixmap);
-    }
-    //QStyledItemDelegate::paint(painter,option,index);
+        QString typeName(var.typeName());
 
+        if(typeName == "CustomItemData")
+        {
+            CustomItemData data=var.value<CustomItemData>();
+            mWidget->setStyleOption(option);
+            mWidget->setData(data);
+            mWidget->setFixedSize(option.rect.width(),option.rect.height());
+            QPixmap pixmap(mWidget->size());
+            mWidget->render(&pixmap);
+            painter->drawPixmap(option.rect,pixmap);
+        }
+        else
+            QStyledItemDelegate::paint(painter,option,index);
+    }
 }
 
 QSize CustomItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const

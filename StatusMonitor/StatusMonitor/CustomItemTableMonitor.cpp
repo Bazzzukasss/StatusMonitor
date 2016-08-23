@@ -24,6 +24,9 @@ void CustomItemTableMonitor::build()
     mLayout->addWidget(mView);
     mCaption->setChecked(false);
     mView->resizeViewToContents();
+    //mView->setAlternatingRowColors(true);
+    mView->verticalHeader()->hide();
+    mView->setSelectionBehavior(QAbstractItemView::SelectRows);
     setHeaders({"NAME","VALUE","DESC","TEST"});
 }
 

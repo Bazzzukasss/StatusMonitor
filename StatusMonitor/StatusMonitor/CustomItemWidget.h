@@ -16,12 +16,10 @@ public:
     explicit CustomItemWidget(QWidget *parent = 0);
     explicit CustomItemWidget(CustomItemData data,QWidget *parent = 0);
 
+    void setStyleOption(const QStyleOptionViewItem &option);
     void setData(CustomItemData data);
-
     CustomItemData getData() const;
-
     void setCurrentPropertyIndex(int propertyIndex);
-
     QSize getSize();
 
 signals:
@@ -50,6 +48,7 @@ private:
     QLCDNumberSI*        mLCDWidget;
 
     QVBoxLayout* mLayout;
+    QStyleOptionViewItem mOption;
 };
 
 #endif // CUSTOMITEMWIDGET_H

@@ -12,6 +12,11 @@ CustomItemWidget::CustomItemWidget(CustomItemData data, QWidget *parent)
     setData(data);
 }
 
+void CustomItemWidget::setStyleOption(const QStyleOptionViewItem &option)
+{
+    mOption = option;
+}
+
 void CustomItemWidget::setData(CustomItemData data)
 {
     mData = data;

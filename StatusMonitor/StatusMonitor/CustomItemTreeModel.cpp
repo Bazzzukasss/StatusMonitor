@@ -33,7 +33,6 @@ QVariant CustomItemTreeModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     return QVariant().fromValue(item->getData());
-
 }
 
 bool CustomItemTreeModel::setData(const QModelIndex &index, const QVariant &value, int role)

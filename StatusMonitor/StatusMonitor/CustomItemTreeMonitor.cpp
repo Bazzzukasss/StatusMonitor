@@ -24,6 +24,9 @@ void CustomItemTreeMonitor::build()
     mLayout->addWidget(mView);
     mCaption->setChecked(false);
     mView->resizeViewToContents();
+    //mView->setAlternatingRowColors(true);
+    mView->setSelectionBehavior(QAbstractItemView::SelectRows);
+
     setHeaders({"NAME","VALUE","DESC"});
 }
 

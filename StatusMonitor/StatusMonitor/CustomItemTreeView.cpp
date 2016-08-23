@@ -48,11 +48,8 @@ void CustomItemTreeView::init()
 
     setModel(mModel);
     setItemDelegate(mDelegate);
-    resizeViewToContents();
-
     setSelectionModel(mSelectionModel);
-    //setAlternatingRowColors(true);
-    setSelectionBehavior(QAbstractItemView::SelectItems);
+    resizeViewToContents();
 
     connect(mSelectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)),   this,   SLOT(slotCurrentChanged(QModelIndex,QModelIndex)));
 }

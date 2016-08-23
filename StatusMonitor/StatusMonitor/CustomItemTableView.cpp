@@ -62,12 +62,8 @@ void CustomItemTableView::init()
     setModel(mModel);
     setItemDelegate(mDelegate);
     setShowGrid(false);
-    //verticalHeader()->hide();
-    resizeViewToContents();
-
     setSelectionModel(mSelectionModel);
-    setAlternatingRowColors(true);
-    setSelectionBehavior(QAbstractItemView::SelectItems);
+    resizeViewToContents();
 
     connect(mSelectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)),   this,   SLOT(slotCurrentChanged(QModelIndex,QModelIndex)));
 }
